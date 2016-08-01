@@ -45,7 +45,8 @@ class AuthAPI(Resource):
 
 @ns_auth.route('/forgot-password', endpoint='auth.forgot-password')
 class AuthUser(Resource):
-    @ns_auth.response(422, 'ValidationError')
+    @ns_auth.marshal_with(fileds)   
+    @ns_auth.response(404, 'User with that email does not exist')
     def get(self):
         """Forgot password"""
         args = parser.parse_args()
